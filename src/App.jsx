@@ -1,14 +1,51 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
+import React, { useState } from "react";
+import Content from "./Content";
+import Result from "./Result";
+import ColorComponent from "./ColorComponent";
+import Heading from "./Heading";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [inputData, setInputData] = useState({
+    thoughts: "",
+    author: "",
+    insta_handle: "",
+  });
+
+  const [selectedBackground, setSelectedBackground] = useState(""); // State to track selected background
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    console.log(name, value);
+    setInputData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
 
   return (
     <>
-      <h1 className="text-9xl playwrite">Hell world</h1>
+      <Heading />
+      <div className="min-h-screen w-full flex">
+        {/* Full width and height */}
+        <div className="flex flex-col lg:flex-row w-full">
+          {/* Content column */}
+          <div className="w-full lg:w-1/2 p-4 flex flex-col justify-center">
+            <Content
+              inputData={inputData}
+              handleInputChange={handleInputChange}
+            />
+          </div>
+          {/* Result column (on top for mobile) */}
+          <div className="w-full lg:w-1/2 p-4 flex flex-col justify-center order-first lg:order-last">
+            <Result
+              inputData={inputData}
+              selectedBackground={selectedBackground}
+            />
+            <ColorComponent onSelectBackground={setSelectedBackground} />
+            {/* Pass function to select background */}
+          </div>
+        </div>
+      </div>
     </>
   );
 }
