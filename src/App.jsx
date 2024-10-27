@@ -44,7 +44,7 @@ function App() {
             />
             <ColorComponent onSelectBackground={setSelectedBackground} />
             <div className="mt-5 w-full flex items-center justify-center">
-              <ResultBtn aspectRatio="portrait" />
+              <ResultBtn aspectRatio={"portrait"} />
             </div>
           </div>
         </div>

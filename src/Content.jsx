@@ -21,7 +21,7 @@ const Content = ({ inputData, handleInputChange }) => {
         placeholder="✨ Share your thoughts here..."
         rows={4}
         cols={4}
-        maxlength="50"
+        maxLength="50"
       />
 
       {/* First input field */}
