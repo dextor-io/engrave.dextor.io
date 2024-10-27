@@ -10,8 +10,6 @@ const Result = ({ inputData, selectedBackground }) => {
   return (
     <div
       className="w-full lg:h-96 h-72 p-4 space-y-6 text-white relative"
-      onMouseEnter={() => setIsFocused(true)}
-      onMouseLeave={() => setIsFocused(false)}
       tabIndex="0"
     >
       <div
@@ -24,26 +22,21 @@ const Result = ({ inputData, selectedBackground }) => {
               "{inputData.thoughts || "cook your thoughts here... 😉"}"
             </p>
           </div>
+          <p className="kanit-semibold text-end pr-5">
+            {(inputData.author && `~ ${inputData.author}`) ||
+              "who wrote this ?"}
+          </p>
           <div className="flex justify-between items-end w-full">
-            <p className="kanit-light text-lg break-words whitespace-pre-wrap overflow-hidden text-start">
-              {inputData.author || "who wrote this ?"}
+            <p className="kanit-semibold md:text-lg text-sm  break-words whitespace-pre-wrap overflow-hidden text-start">
+              {`${inputData.insta_handle && `@${inputData.insta_handle}`}` ||
+                "can I get your insta ?"}
             </p>
-            <p className="kanit-bold text-lg break-words whitespace-pre-wrap overflow-hidden text-end">
-              ~ {inputData.insta_handle || "can I get your insta ?"}
+            <p className="kanit-bold md:text-lg text-sm  break-words whitespace-pre-wrap overflow-hidden text-end">
+              Engrave
             </p>
           </div>
         </div>
       </div>
-
-      {/* Button appears in the top-right corner */}
-      {isFocused && (
-        <div className="absolute top-4 right-10 z-10">
-          <ResultBtn
-            aspectRatio="portrait"
-            className={`${selectedBackground ? "text-white" : "text-black"}`}
-          />
-        </div>
-      )}
     </div>
   );
 };

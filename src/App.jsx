@@ -3,6 +3,7 @@ import Content from "./Content";
 import Result from "./Result";
 import ColorComponent from "./ColorComponent";
 import Heading from "./Heading";
+import ResultBtn from "./ResultBtn";
 
 function App() {
   const [inputData, setInputData] = useState({
@@ -42,7 +43,9 @@ function App() {
               selectedBackground={selectedBackground}
             />
             <ColorComponent onSelectBackground={setSelectedBackground} />
-            {/* Pass function to select background */}
+            <div className="mt-5 w-full flex items-center justify-center">
+              <ResultBtn aspectRatio="portrait" />
+            </div>
           </div>
         </div>
       </div>
