@@ -19,7 +19,9 @@ const Content = ({ inputData, handleInputChange }) => {
         value={inputData.thoughts}
         onChange={handleTextareaChange}
         placeholder="✨ Share your thoughts here..."
-        rows="4" // You can adjust this value based on your design
+        rows={4}
+        cols={4}
+        maxlength="50"
       />
 
       {/* First input field */}
@@ -29,7 +31,7 @@ const Content = ({ inputData, handleInputChange }) => {
         name="author"
         value={inputData.author}
         onChange={handleInputChange}
-        placeholder="🧐 your Instagram handle?"
+        placeholder="✍🏻 Name of the Author"
       />
 
       {/* Second input field */}
@@ -39,7 +41,7 @@ const Content = ({ inputData, handleInputChange }) => {
         name="insta_handle"
         value={inputData.insta_handle}
         onChange={handleInputChange}
-        placeholder="✍🏻 Name of the Author?"
+        placeholder="🧐 your insta handle"
       />
     </section>
   );
