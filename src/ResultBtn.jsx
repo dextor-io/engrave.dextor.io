@@ -40,9 +40,6 @@ export default function ResultBtn({ aspectRatio }) {
         canvasHeight: height,
         pixelRatio: 1,
         style: {
-          fontSize: "96px",
-          transform: "scale(1)",
-          transformOrigin: "center",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -55,6 +52,7 @@ export default function ResultBtn({ aspectRatio }) {
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
+        window.location.reload();
 
         // Revert back to the original font size
         resultElement.querySelectorAll("p").forEach((p) => {
