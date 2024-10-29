@@ -26,28 +26,39 @@ function App() {
   return (
     <>
       <Heading />
-      <div className="min-h-screen w-full flex">
+      <div className="min-h-screen w-full flex overflow-auto min-h-screen relative">
         {/* Full width and height */}
+
         <div className="flex flex-col lg:flex-row w-full">
           {/* Content column */}
-          <div className="w-full lg:w-1/2 p-4 flex flex-col justify-center">
+          <div className="w-full lg:w-1/2 p-4 flex flex-col justify-center items-center">
             <Content
               inputData={inputData}
               handleInputChange={handleInputChange}
             />
+            <div className=" flex flex-col items-center justify-center">
+              <ColorComponent onSelectBackground={setSelectedBackground} />
+              <div className="mt-5 w-full flex items-center justify-center pb-10 lg:pb-0">
+                <ResultBtn aspectRatio={"portrait"} />
+              </div>
+            </div>
           </div>
           {/* Result column (on top for mobile) */}
-          <div className="w-full lg:w-1/2 p-4 flex flex-col justify-center order-first lg:order-last">
+          <div className="w-full lg:w-1/2 px-4 flex flex-col justify-center order-first lg:order-last">
             <Result
               inputData={inputData}
               selectedBackground={selectedBackground}
             />
-            <ColorComponent onSelectBackground={setSelectedBackground} />
-            <div className="mt-5 w-full flex items-center justify-center">
-              <ResultBtn aspectRatio={"portrait"} />
-            </div>
           </div>
         </div>
+        <footer className=" absolute bottom-0 left-0 right-0 py-2">
+          <p className="cedarville-cursive-regular text-center text-white lg:text-xl text-lg">
+            Made with ❤️ by{" "}
+            <a href="#" className="text-blue-500 hover:underline">
+              Dextor
+            </a>
+          </p>
+        </footer>
       </div>
     </>
   );
