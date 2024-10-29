@@ -19,6 +19,19 @@ export default function ResultBtn({ aspectRatio }) {
       height = 1350;
     }
 
+    const originalFontSize = getComputedStyle(resultElement).fontSize;
+    const thoughtFontSize = "46px"; // Set desired font size for the author
+    const otherFontSize = "36px"; // Set desired font size for other text
+
+    // Set the font sizes for all relevant text elements
+    resultElement.querySelectorAll("p").forEach((p) => {
+      if (p.classList.contains("thoughts")) {
+        p.style.fontSize = thoughtFontSize; // Change this for the author
+      } else {
+        p.style.fontSize = otherFontSize; // Change this for other text elements
+      }
+    });
+
     htmlToImage
       .toPng(resultElement, {
         width,
@@ -27,10 +40,6 @@ export default function ResultBtn({ aspectRatio }) {
         canvasHeight: height,
         pixelRatio: 1,
         style: {
-          width: `${width}px`,
-          height: `${height}px`,
-          transform: "scale(1)",
-          transformOrigin: "center",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -43,6 +52,11 @@ export default function ResultBtn({ aspectRatio }) {
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
+
+        // Revert back to the original font size
+        resultElement.querySelectorAll("p").forEach((p) => {
+          p.style.fontSize = originalFontSize;
+        });
       })
       .catch((error) => {
         console.error("Error downloading image:", error);
@@ -51,7 +65,7 @@ export default function ResultBtn({ aspectRatio }) {
 
   return (
     <button
-      className="btn btn-primary w-fit text-white flex items-center justify-end"
+      className="btn hover:bg-black bg-gray-800 w-fit text-white flex items-center justify-end z-10"
       onClick={handleDownload}
     >
       <svg

@@ -11,7 +11,7 @@ const ColorComponent = ({ onSelectBackground }) => {
   ];
 
   return (
-    <div className="flex flex-wrap gap-4 justify-center mt-5">
+    <div className="flex flex-wrap gap-4 justify-center items-center mx-auto lg:p-4 p-2 glass mt-4">
       {gradients.map((gradient, index) => (
         <button
           key={index}
