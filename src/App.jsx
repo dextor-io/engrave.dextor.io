@@ -32,14 +32,16 @@ function App() {
         <div className="flex flex-col lg:flex-row w-full">
           {/* Content column */}
           <div className="w-full lg:w-1/2 p-4 flex flex-col justify-center items-center">
-            <Content
-              inputData={inputData}
-              handleInputChange={handleInputChange}
-            />
-            <div className=" flex flex-col items-center justify-center">
-              <ColorComponent onSelectBackground={setSelectedBackground} />
-              <div className="mt-5 w-full flex items-center justify-center pb-10 lg:pb-0">
-                <ResultBtn aspectRatio={"portrait"} />
+            <div className="glass pb-5">
+              <Content
+                inputData={inputData}
+                handleInputChange={handleInputChange}
+              />
+              <div className=" flex flex-col items-center justify-center">
+                <ColorComponent onSelectBackground={setSelectedBackground} />
+                <div className="mt-5 w-full flex items-center justify-center pb-10 lg:pb-0">
+                  <ResultBtn aspectRatio={"portrait"} />
+                </div>
               </div>
             </div>
           </div>
@@ -52,9 +54,9 @@ function App() {
           </div>
         </div>
         <footer className=" absolute bottom-0 left-0 right-0 py-2">
-          <p className="cedarville-cursive-regular text-center text-white lg:text-xl text-lg">
+          <p className="cedarville-cursive-regular text-center text-black lg:text-xl text-lg">
             Made with ❤️ by{" "}
-            <a href="#" className="text-blue-500 hover:underline">
+            <a href="#" className="hover:underline">
               Dextor
             </a>
           </p>
