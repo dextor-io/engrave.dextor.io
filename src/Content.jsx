@@ -22,7 +22,7 @@ const Content = ({ inputData, handleInputChange }) => {
         placeholder="write your thoughts here..."
         rows={4}
         cols={4}
-        maxLength="50"
+        maxLength="300"
       />
 
       {/* First input field */}
