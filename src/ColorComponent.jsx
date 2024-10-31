@@ -1,25 +1,40 @@
 import React from "react";
+import { motion } from "framer-motion";
+import { Check } from "lucide-react";
 
-const ColorComponent = ({ onSelectBackground }) => {
+const ColorComponent = ({ onSelectBackground, selectedBackground }) => {
   const gradients = [
-    "bg-white text-black",
-    "bg-gradient-to-r from-blue-500 to-purple-500 text-white",
-    "bg-gradient-to-r from-green-400 to-blue-500 text-white",
-    "bg-gradient-to-r from-yellow-400 to-red-500 text-white",
-    "bg-gradient-to-r from-pink-500 to-purple-500 text-white",
-    "bg-gradient-to-r from-indigo-500 to-blue-500 text-white",
+    { class: "bg-white", name: "Classic White" },
+    { class: "bg-gradient-to-r from-indigo-500 to-purple-500", name: "Ocean Dream" },
+    { class: "bg-gradient-to-r from-green-400 to-blue-500", name: "Forest Breeze" },
+    { class: "bg-gradient-to-r from-yellow-400 to-red-500", name: "Sunset Glow" },
+    { class: "bg-gradient-to-r from-pink-500 to-purple-500", name: "Berry Fusion" },
+    { class: "bg-gradient-to-r from-indigo-500 to-blue-500", name: "Midnight Sky" },
   ];
 
   return (
-    <div className="flex flex-wrap lg:gap-4 gap-2 justify-center items-center mx-auto lg:p-4 p-2 mt-4">
-      {gradients.map((gradient, index) => (
-        <button
-          key={index}
-          className={`md:w-16 md:h-16 min-w-10 min-h-10 rounded-lg shadow-md ${gradient}`}
-          onClick={() => onSelectBackground(gradient)}
-          aria-label={`Select gradient ${index + 1}`}
-        />
-      ))}
+    <div className="w-full p-6 bg-white shadow-sm rounded-3xl">
+      <h3 className="mb-6 text-xl font-semibold text-gray-900">Choose Background</h3>
+      <div className="flex flex-wrap items-center justify-start gap-4">
+        {gradients.map((gradient, index) => (
+          <motion.button
+            key={index}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className={`
+              relative w-14 h-14 rounded-2xl shadow-sm
+              transition-all duration-300 ease-in-out
+              ${gradient.class}
+              ${selectedBackground === gradient.class 
+                ? 'ring-2 ring-blue-500 ring-offset-2' 
+                : 'hover:ring-2 hover:ring-gray-200 hover:ring-offset-1'
+              }
+            `}
+            onClick={() => onSelectBackground(gradient.class)}
+            aria-label={`Select ${gradient.name} background`}
+          />
+        ))}
+      </div>
     </div>
   );
 };

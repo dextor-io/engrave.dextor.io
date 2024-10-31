@@ -1,90 +1,73 @@
-import React from "react";
+import React, { useState } from "react";
 import * as htmlToImage from "html-to-image";
+import { Download, Loader2 } from "lucide-react";
 
 export default function ResultBtn({ aspectRatio }) {
-  const handleDownload = () => {
+  const [isDownloading, setIsDownloading] = useState(false);
+
+  const handleDownload = async () => {
+    setIsDownloading(true);
     const resultElement = document.getElementById("result");
 
-    // Define the dimensions based on the selected aspect ratio
-    let width, height;
-    if (aspectRatio === "portrait") {
-      //default 1:1 ratio
-      width = 1080;
-      height = 1080;
-    } else if (aspectRatio === "landscape") {
-      width = 1080;
-      height = 608;
-    } else {
-      width = 1080;
-      height = 1350;
-    }
+    try {
+      // Get original dimensions
+      const width = resultElement.offsetWidth;
+      const height = resultElement.offsetHeight;
 
-    const originalFontSize = getComputedStyle(resultElement).fontSize;
-    const thoughtFontSize = "46px"; // Set desired font size for the author
-    const otherFontSize = "36px"; // Set desired font size for other text
-
-    // Set the font sizes for all relevant text elements
-    resultElement.querySelectorAll("p").forEach((p) => {
-      if (p.classList.contains("thoughts")) {
-        p.style.fontSize = thoughtFontSize; // Change this for the author
-      } else {
-        p.style.fontSize = otherFontSize; // Change this for other text elements
-      }
-    });
-
-    htmlToImage
-      .toPng(resultElement, {
+      const dataUrl = await htmlToImage.toPng(resultElement, {
         width,
         height,
         canvasWidth: width,
         canvasHeight: height,
-        pixelRatio: 1,
+        pixelRatio: 3, // Higher quality for better text rendering
         style: {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
         },
-      })
-      .then((dataUrl) => {
-        const link = document.createElement("a");
-        link.href = dataUrl;
-        link.download = "result.png";
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-
-        // Revert back to the original font size
-        resultElement.querySelectorAll("p").forEach((p) => {
-          p.style.fontSize = originalFontSize;
-        });
-      })
-      .catch((error) => {
-        console.error("Error downloading image:", error);
       });
+
+      // Create download link
+      const link = document.createElement("a");
+      link.href = dataUrl;
+      link.download = `thought-${new Date().getTime()}.png`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+    } catch (error) {
+      console.error("Error downloading image:", error);
+      alert("Failed to download image. Please try again.");
+    } finally {
+      setIsDownloading(false);
+    }
   };
 
   return (
-    <button
-      className="btn hover:bg-black bg-gray-800 w-fit text-white flex items-center justify-end z-10"
-      onClick={handleDownload}
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className="mr-2 flex"
+    <div className="w-full p-6 bg-white shadow-sm rounded-3xl">
+      <button
+        disabled={isDownloading}
+        className={`
+          w-full flex items-center justify-center
+          px-6 py-4 text-white rounded-2xl
+          transition-all duration-300 ease-in-out
+          ${isDownloading 
+            ? 'bg-gray-500 cursor-not-allowed' 
+            : 'bg-black hover:bg-gray-800'
+          }
+        `}
+        onClick={handleDownload}
+        aria-label="Download image"
       >
-        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-        <polyline points="7 10 12 15 17 10"></polyline>
-        <line x1="12" y1="15" x2="12" y2="3"></line>
-      </svg>
-      Download
-    </button>
+        {isDownloading ? (
+          <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+        ) : (
+          <Download className="w-5 h-5 mr-2" />
+        )}
+        <span className="font-medium">
+          {isDownloading ? 'Processing...' : 'Download'}
+        </span>
+      </button>
+    </div>
   );
 }
