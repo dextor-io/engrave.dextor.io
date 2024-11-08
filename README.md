@@ -18,4 +18,4 @@ Currently, two official plugins are available for this setup:
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc): Uses [SWC](https://swc.rs/) for Fast Refresh.
 
 License
-This project is licensed under the MIT License. You are free to use, modify, and distribute this software in compliance with the MIT License terms. See the [License](/License.md) file for more details.
+This project is licensed under the MIT License. You are free to use, modify, and distribute this software in compliance with the MIT License terms. See the [License](/LICENSE) file for more details.
