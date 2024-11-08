@@ -16,3 +16,6 @@ This project is an MVP designed to create previews of Instagram posts, specifica
 Currently, two official plugins are available for this setup:
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md): Uses [Babel](https://babeljs.io/) for Fast Refresh.
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc): Uses [SWC](https://swc.rs/) for Fast Refresh.
+
+License
+This project is licensed under the MIT License. You are free to use, modify, and distribute this software in compliance with the MIT License terms. See the [License](/License.md) file for more details.
